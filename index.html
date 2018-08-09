@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>打灰机</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="game" width="666" height="666"></canvas>
+    <div id="uiIndex">
+        <h1 class="title">打灰机</h1>
+        <div class="indexButton">
+            <button id="startGame" class="btn">开始游戏</button>
+            <button id="gameSetting" class="btn">游戏设置</button>
+            <button id="gameRule" class="btn">游戏说明</button>
+        </div>
+    </div>
+
+    <div id="uiSetting">
+        <h2 class="title">游戏设置</h2>
+        <p>音乐设置
+        <select id="musicSetting" class="setSelect">
+            <option value="open">开启音乐</option>
+            <option value="close">关闭音乐</option>
+        </select>
+        </p>
+        <p>战机设置
+        <select id="planeSetting" class="setSelect">
+            <option value="bluePlaneIcon">蓝色战机</option>
+            <option value="pinkPlaneIcon">粉红战机</option>
+        </select>
+        </p>
+        <p>背景设置
+        <select id="backgroundSetting" class="setSelect">
+            <option value="1">背景1</option>
+            <option value="2">背景2</option>
+            <option value="3">背景3</option>
+            <option value="4">背景4</option>
+        </select>
+        </p>
+        <button id="confirmSetting" class="btn">确认设置</button>
+    </div>
+
+    <div id="uiRule">
+        <h2 class="title">游戏说明</h2>
+        <p class="rule">通过手指触摸移动飞机击杀敌人，小飞机100分，大飞机1000分，无限时</p>
+        <button id="confirmRule" class="btn">我明白了</button>
+    </div>
+
+    <div id="uiResult">
+        <h2 class="title">游戏结束</h2>
+        <p class="result">你的得分<span id="score"></span></p>
+        <button id="confirmResult" class="btn">我知道了</button>
+    </div>
+
+    <div id="uiScore">
+        <p class="score">得分<span id="gamingScore"></span></p>
+    </div>
+
+    <script src="js/resource.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/element.js"></script>
+    <script src="js/bullet.js"></script>
+    <script src="js/enemy.js"></script>
+    <script src="js/plane.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-image: url("./img/bg_1.jpg");
+}
+
+#uiIndex, #uiSetting, #uiRule, #uiResult {
+    height: 200px;
+    position: absolute;
+    top: 50%;
+    margin-top: -100px;
+    width: 100%;
+    text-align: center;
+}
+
+#uiSetting, #uiRule, #uiResult, #uiScore {
+    display: none;
+}
+
+.title {
+    text-align: center;
+    color: white;
+}
+
+#game {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+.btn {
+    width: 166px;
+    height: 30px;
+    display: block;
+    margin: auto; 
+    margin-top: 16px;
+    background: none;
+    color: white;
+    border: 2px solid white;
+    border-radius: 6px;
+}
+
+.setSelect {
+    margin-left: 36px;
+    width: 100px;
+}
+
+#uiSetting p {
+    color: white;
+    margin-top: 8px;
+}
+
+.rule {
+    color: white;
+    width: 80%;
+    margin-top: 16px;
+    margin-left: 10%;
+}
+
+.result {
+    color: white;
+    margin-top: 16px;
+}
+
+.score {
+    color: white;
+}
