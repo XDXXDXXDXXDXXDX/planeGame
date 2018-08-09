@@ -32,6 +32,7 @@ var GAME = {
     // // 飞机对象初始横坐标
     this.planePosX = canvasWidth / 2 - opts.planeSize.width / 2;
     this.planePosY = canvasHeight - opts.planeSize.height - 50;
+    this.planeIcon = this.planeIcon || resourceHelper.getImage("bluePlaneIcon");
     // opts.planeType = opts.planeType || 'bluePlaneIcon';
     // 加载图片资源，加载完成才能交互
     // resourceHelper.load(opts.resources, function(resources) {
@@ -48,12 +49,12 @@ var GAME = {
   /**
    * 设置游戏相关配置
    */
-//   setGameOptions: function(opts) {
-//     // 根据配置数据设置飞机型号
-//     if (opts.planeType) {
-//       this.planeIcon = this.images[opts.planeType];
-//     }
-//   },
+  // setGameOptions: function(opts) {
+  //   // 根据配置数据设置飞机型号
+  //   if (opts.planeType) {
+  //     this.planeIcon = this.images[opts.planeType];
+  //   }
+  // },
   /**
    * 更新游戏状态，分别有以下几种状态：
    * start  游戏前
@@ -62,19 +63,19 @@ var GAME = {
    * success 游戏成功
    * stop 游戏暂停
    */
-  setStatus: function(status) {
-    this.status = status;
-  },
+  // setStatus: function(status) {
+  //   this.status = status;
+  // },
   /**
    * start 游戏开始需要设置
    * - 创建飞机
    * - 设置初始参数
    */
-  start: function (params) {
+  start: function () {
     // 获取游戏初始化 level
     var self = this;
     var opts = this.opts;
-    var images = this.images;
+    // var images = this.images;
     // 清空射击目标对象数组
     this.enemies = []; 
     this.score = 0;
@@ -83,7 +84,7 @@ var GAME = {
     this.plane = new Plane({
       x: this.planePosX,
       y: this.planePosY,
-      icon: resourceHelper.getImage("bluePlaneIcon"),
+      icon: this.planeIcon,
       width: opts.planeSize.width,
       height: opts.planeSize.height,
       bulletSize: opts.bulletSize, // 默认子弹长度
@@ -92,7 +93,7 @@ var GAME = {
       boomIcon: resourceHelper.getImage("enemyBigBoomIcon")
     });
     // 播放背景音乐
-    // resourceHelper.playSound('gameSound', {loop: true});
+    resourceHelper.playSound('gameSound', {loop: true});
 
     // // 飞机开始射击
     this.plane.startShoot();
@@ -108,7 +109,7 @@ var GAME = {
       self.createEnemy('big');
     }, 1500);
     
-    this.setStatus('playing');
+    // this.setStatus('playing');
     // 开始动画循环
     this.update();
 
@@ -149,7 +150,7 @@ var GAME = {
     if (enemies.length < 5) {
       enemies.push(new Enemy(initOpt));
     }
-
+    
     // console.log(enemies);
   },
   update: function (params) {
@@ -167,7 +168,7 @@ var GAME = {
     // 如果飞机死了游戏就结束
     if (this.plane.status === 'boomed') {
       // 游戏结束
-      this.setStatus('end');
+      // this.setStatus('end');
       this.end();
       return;
     }
@@ -183,8 +184,8 @@ var GAME = {
     // 先清理画布
     context.clearRect(0, 0, canvasWidth, canvasHeight);
     // 清除声音
-//     resourceHelper.pauseSound('gameSound');
-//     resourceHelper.pauseSound('shootSound');
+    resourceHelper.pauseSound('gameSound');
+    // resourceHelper.pauseSound('shootSound');
     // 清除定时器
     clearInterval(this.createBigEnemyInterval);
     clearInterval(this.createSmallEnemyInterval);
@@ -256,7 +257,7 @@ var GAME = {
       } else {
         if (plane.status === 'normal' && plane.hasCrash(enemy)) {
           plane.booming();
-        //   resourceHelper.playSound('dieSound');
+          resourceHelper.playSound('dieSound');
         }
         // 根据怪兽状态判断是否被击中
         switch(enemy.status) {
@@ -264,8 +265,8 @@ var GAME = {
             // 判断是否击中未爆炸的敌人
             if (plane.hasHit(enemy)) {
               // 设置爆炸时长展示第一帧）
-              // resourceHelper.playSound('boomSound');
               enemy.live --;
+              resourceHelper.playSound('shootSound');
               // console.log(enemy);
               if (enemy.live === 0) {
                 enemy.booming();
@@ -279,6 +280,7 @@ var GAME = {
             var point = enemy.type === 'big' ? 1000 : 100;
             this.enemies.splice(i, 1);
             this.score += point;
+            resourceHelper.playSound('boomSound');
         }
       }
       

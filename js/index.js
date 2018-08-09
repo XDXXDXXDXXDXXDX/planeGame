@@ -25,19 +25,33 @@ function bindEvent() {
         var url = "./img/bg_" + bgSelect.options[bgIndex].value + ".jpg";
         document.body.style.backgroundImage = "url("+url+")";
         //设置飞机
-        var planeSelect = document.getElementById("backgroundSetting");
+        var planeSelect = document.getElementById("planeSetting");
         var planeIndex = planeSelect.selectedIndex;
-
+        var planeIcon = planeSelect.options[planeIndex].value;
+        GAME.planeIcon = resourceHelper.getImage(planeIcon);
+        //是否开启音乐
+        var musicSelect = document.getElementById("musicSetting");
+        var musicIndex = musicSelect.selectedIndex;
+        var playMusic = musicSelect.options[musicIndex].value;
+        if (playMusic=="close") {
+            resourceHelper.enableMusic = false;
+        }
     }, false);
-
+        
     document.getElementById("confirmRule").addEventListener("click",function() {
         document.getElementById("uiIndex").style.display= "block";
         document.getElementById("uiRule").style.display= "none";
     }, false);
 
+    //结束页面
     document.getElementById("confirmResult").addEventListener("click",function() {
         document.getElementById("uiIndex").style.display= "block";
         document.getElementById("uiResult").style.display= "none";
+    }, false);
+
+    document.getElementById("again").addEventListener("click",function() {
+        document.getElementById("uiResult").style.display= "none";
+        GAME.start();
     }, false);
 };
 

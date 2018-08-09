@@ -16,7 +16,7 @@ var Plane = function (opts) {
   this.bulletSize = opts.bulletSize;
   this.bulletSpeed = opts.bulletSpeed;
   this.bulletIcon = opts.bulletIcon;
-  // this.shootSound = opts.shootSound;
+  this.shootSound = opts.shootSound;
    // 特有属性，爆炸相关
   this.boomIcon = opts.boomIcon;
   this.boomCount = 0;
