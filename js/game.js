@@ -30,13 +30,15 @@ var GAME = {
     this.planePosX = canvasWidth / 2 - opts.planeSize.width / 2;
     this.planePosY = canvasHeight - opts.planeSize.height - 50;
     //获取飞机的图像，若没有进行设置则默认为蓝色战机图像
-    this.planeIcon = this.planeIcon || resourceHelper.getImage("bluePlaneIcon");
+    this.planeIcon = this.planeIcon || resourceHelper.getImage("plane1");
   },
   //游戏开始
   start: function () {
     var self = this;
     var opts = this.opts;
     this.score = 0;//分数清零
+    this.timeCount = 60;//倒计时从头开始
+    this.winOlose = false;//默认状态为失败
     this.enemies = []; //敌人数组清零
     // 创建主角英雄
     this.plane = new Plane({
@@ -65,12 +67,13 @@ var GAME = {
     
     // 开始动画循环
     this.update();
- 
+    this.countDown60s();
     // 播放背景音乐
     resourceHelper.playSound('gameSound', {loop: true});
 
     //显示左上角的即时得分
     document.getElementById("uiScore").style.display = "block";
+    document.getElementById("uiCountDown").style.display = "block";
   },
   //生成怪兽
   createEnemy: function(type) {
@@ -123,26 +126,23 @@ var GAME = {
       return;
     }
 
+    //60s后游戏结束
+    if(this.timeCount == 0) {
+      this.winOlose = true;
+      this.end();
+      return;
+    }
+
     //获取即时得分
     document.getElementById("gamingScore").innerHTML=this.score;
+
+    //获得剩余时间
+    document.getElementById("remainingTime").innerHTML=this.timeCount;
 
     // 不断循环 update
     requestAnimFrame(function() {
       self.update()
     });
-  },
-  //游戏结束
-  end: function() {
-    // 先清理画布
-    context.clearRect(0, 0, canvasWidth, canvasHeight);
-    // 清除声音
-    resourceHelper.pauseSound('gameSound');
-    // 清除定时器
-    clearInterval(this.createBigEnemyInterval);
-    clearInterval(this.createSmallEnemyInterval);
-    document.getElementById("uiScore").style.display = "none";
-    document.getElementById("uiResult").style.display= "block";
-    document.getElementById("score").innerHTML=this.score;
   },
   //绑定外部事件
   bindTouchAction: function () {
@@ -238,6 +238,44 @@ var GAME = {
     this.enemies.forEach(function(enemy) {
       enemy.draw();
     });
+  },
+  //60s倒计时
+  countDown60s: function() {
+    var i = 60;
+    var self = this;
+    this.countDown = setInterval(function(){
+      if (i>0) {
+        i--;
+        if (i<10) {
+          self.timeCount = "0" + i;
+        }
+        else {
+          self.timeCount = i;
+        }
+      }
+    },1000);
+  },
+   //游戏结束
+   end: function() {
+    // 先清理画布
+    context.clearRect(0, 0, canvasWidth, canvasHeight);
+    // 清除声音
+    resourceHelper.pauseSound('gameSound');
+    // 清除定时器
+    clearInterval(this.createBigEnemyInterval);
+    clearInterval(this.createSmallEnemyInterval);
+    clearInterval(this.countDown);
+    document.getElementById("uiScore").style.display = "none";
+    document.getElementById("uiCountDown").style.display = "none";
+    document.getElementById("uiResult").style.display= "block";
+    document.getElementById("score").innerHTML=this.score;
+    document.getElementById("keepTime").innerHTML=this.timeCount;
+    if (this.winOlose) {
+      document.getElementById("win").style.display= "block";
+    }
+    else {
+      document.getElementById("lose").style.display= "block";
+    }
   }
 };
 

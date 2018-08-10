@@ -2,8 +2,8 @@
 var CONFIG = {
     enemySpeed: 4,
     planeSize: {
-        width: 60,
-        height: 45
+        width: 36,
+        height: 55
     },
     enemySmallSize: {
         width: 54,
@@ -21,10 +21,10 @@ var CONFIG = {
     resources: {
         images: [
           { src: './img/plane_1.png',
-            name: 'bluePlaneIcon'
+            name: 'plane1'
           },
           { src: './img/plane_2.png',
-            name: 'pinkPlaneIcon'
+            name: 'plane2'
           },
           { src: './img/fire.png',
             name: 'fireIcon'

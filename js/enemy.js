@@ -14,7 +14,6 @@ Enemy.prototype = new Element();
 
 Enemy.prototype.down = function() {
     this.move(0, this.speed);
-    // return this;
 }
 
 Enemy.prototype.booming = function() {
@@ -23,7 +22,6 @@ Enemy.prototype.booming = function() {
     if(this.boomCount > 8) {
         this.status = "boomed";
     }
-    // return this;
 }
 
 Enemy.prototype.draw = function() {
@@ -35,5 +33,4 @@ Enemy.prototype.draw = function() {
             context.drawImage(this.boomIcon, this.x, this.y, this.width, this.height);
             break;
     }
-    // return this;
 };

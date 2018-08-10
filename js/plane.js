@@ -17,7 +17,6 @@ var Plane = function (opts) {
   this.bulletSize = opts.bulletSize;
   this.bulletSpeed = opts.bulletSpeed;
   this.bulletIcon = opts.bulletIcon;
-  this.shootSound = opts.shootSound; 
 };
 
 // 继承Element的方法
@@ -27,13 +26,14 @@ Plane.prototype = new Element();
 Plane.prototype.hasCrash = function(target) {
   var crash = false;
   // 判断四边是否都没有空隙
-  if (!(this.x + this.width < target.x) &&
-  !(target.x + target.width < this.x) &&
-  !(this.y + this.height < target.y) &&
-  !(target.y + target.height < this.y)) {
-    // 物体碰撞了
-    crash = true;
-  }
+  if(target.status == 'normal') {
+    if (!(this.x + this.width < target.x) &&
+    !(target.x + target.width < this.x) &&
+    !(this.y + this.height < target.y) &&
+    !(target.y + target.height < this.y)) {
+      // 物体碰撞了
+      crash = true;
+  }}
   return crash;
 };
 

@@ -24,6 +24,8 @@ function bindEvent() {
             document.getElementById("uiSetting").style.display = "none";
             document.getElementById("uiRule").style.display = "none";
             document.getElementById("uiResult").style.display= "none";
+            document.getElementById("win").style.display= "none";
+            document.getElementById("lose").style.display= "none";
         },false);
     }
 
@@ -33,7 +35,7 @@ function bindEvent() {
         var bgSelect = document.getElementById("backgroundSetting");
         var bgIndex = bgSelect.selectedIndex;
         var url = "./img/bg_" + bgSelect.options[bgIndex].value + ".jpg";
-        document.body.style.backgroundImage = "url("+url+")";
+        document.getElementById("game").style.backgroundImage = "url("+url+")";
         //设置飞机
         var planeSelect = document.getElementById("planeSetting");
         var planeIndex = planeSelect.selectedIndex;
@@ -51,6 +53,8 @@ function bindEvent() {
     //点击再来一次按钮重新开始游戏
     document.getElementById("again").addEventListener("click",function() {
         document.getElementById("uiResult").style.display= "none";
+        document.getElementById("win").style.display= "none";
+        document.getElementById("lose").style.display= "none";
         GAME.start();
     }, false);
 };

@@ -8,6 +8,7 @@ body {
     width: 100%;
     overflow: hidden;
     background-image: url("./img/bg_1.jpg");
+    background-repeat: no-repeat;
 }
 
 #uiIndex, #uiSetting, #uiRule, #uiResult {
@@ -19,7 +20,7 @@ body {
     text-align: center;
 }
 
-#uiSetting, #uiRule, #uiResult, #uiScore {
+#uiSetting, #uiRule, #uiResult, #uiScore, #uiCountDown, #win, #lose {
     display: none;
 }
 
@@ -28,14 +29,28 @@ body {
     height: 100%;
     position: absolute;
     z-index: -1;
+    background-image: url("./img/bg_1.jpg");
+    background-repeat: no-repeat;
+    background-size:100% 100%; 
 }
 
-.title, .score, #uiSetting span {
+#uiCountDown, #uiScore {
+    position : absolute;
+    width : 100px;
+}
+
+#uiCountDown {
+    right : 0px;
+    top : 5px;
+}
+
+#uiScore {
+    left : 8px;
+    top : 5px;
+}
+
+.title, .score, .countDown, #uiSetting span {
     color: white;
-}
-
-.title {
-    text-align: center;
 }
 
 .btn {
@@ -63,7 +78,7 @@ body {
     margin-left: 10%;
 }
 
-.result {
+.result, #win, #lose {
     color: white;
     margin-top: 16px;
 }

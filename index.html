@@ -11,6 +11,7 @@
     <canvas id="game" width="666" height="666"></canvas>
     <div id="uiIndex">
         <h1 class="title">打灰机</h1>
+        <h6 class="title">60s真男人v1.0</h6>
         <div>
             <button id="startGame" class="btn">开始游戏</button>
             <button id="gameSetting" class="btn">游戏设置</button>
@@ -28,16 +29,14 @@
         <br/>
         <span>战机设置</span>
         <select id="planeSetting" class="setSelect">
-            <option value="bluePlaneIcon">蓝色战机</option>
-            <option value="pinkPlaneIcon">粉红战机</option>
+            <option value="plane1">黄金战机</option>
+            <option value="plane2">卡通火箭</option>
         </select>
         <br/>
         <span>背景设置</span>
         <select id="backgroundSetting" class="setSelect">
-            <option value="1">坊间流水</option>
-            <option value="2">彩色天堂</option>
-            <option value="3">绿水青山</option>
-            <option value="4">炎热地狱</option>
+            <option value="1">云雾缭绕</option>
+            <option value="2">碧绿湖水</option>
         </select>
         <br/>
         <button id="confirmSetting" class="btn confirmBtn">确认设置</button>
@@ -45,10 +44,12 @@
 
     <div id="uiRule">
         <h2 class="title">游戏说明</h2>
-        <p class="rule">通过手指触摸移动飞机<br/>
+        <p class="rule">
             击杀小飞机得90分<br/>
             击杀大飞机得1000分<br/>
-            无限时间尽情玩耍
+            通过手指触摸移动飞机<br/>
+            被敌机撞击则游戏失败<br/>
+            坚持60秒即可获得胜利<br/>
         </p>
         <button id="confirmRule" class="btn confirmBtn">我明白了</button>
     </div>
@@ -57,11 +58,22 @@
         <h2 class="title">游戏结束</h2>
         <p class="result">你的得分<span id="score"></span></p>
         <button id="confirmResult" class="btn confirmBtn">我知道了</button>
-        <button id="again" class="btn">再来一次</button>
+        <button id="again" class="btn">再试一次</button>
+        <h3 id="win">
+            你获胜了！实在是太伟大了！<br/>
+            争取获得跟高的分数吧！
+        </h3>
+        <h3 id="lose">
+            你坚持了<span id="keepTime"></span>s！<br/>
+            太不容易了！再试一次吧！</h3>
     </div>
 
     <div id="uiScore">
         <p class="score">得分<span id="gamingScore"></span></p>
+    </div>
+
+    <div id="uiCountDown">
+        <p class="countDown">剩余时间<span id="remainingTime"></span>s</p>
     </div>
 
     <script src="js/resource.js"></script>
