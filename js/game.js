@@ -269,7 +269,7 @@ var GAME = {
     document.getElementById("uiCountDown").style.display = "none";
     document.getElementById("uiResult").style.display= "block";
     document.getElementById("score").innerHTML=this.score;
-    document.getElementById("keepTime").innerHTML=this.timeCount;
+    document.getElementById("keepTime").innerHTML= 60 - this.timeCount;
     if (this.winOlose) {
       document.getElementById("win").style.display= "block";
     }
