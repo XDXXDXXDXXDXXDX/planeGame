@@ -1,10 +1,10 @@
-// 画布
+// 获取画布
 var canvas = document.getElementById('game');
 var context = canvas.getContext("2d");
-// 设置画布
+// 设置画布的宽和高为窗口大小
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-// 获取画布相关信息
+// 获取画布可视的宽和高
 var canvasWidth = canvas.clientWidth;
 var canvasHeight = canvas.clientHeight;
 
@@ -19,67 +19,25 @@ function(callback) {
     window.setTimeout(callback, 1000 / 30);
 };
 
-/**
- * 游戏主要实现逻辑
- */
+//主游戏
 var GAME = {
-  /**
-   * 游戏初始化
-   */
-  init: function(opts) {
-    var opts = Object.assign({}, opts, CONFIG);
-    var self = this;
-    // // 飞机对象初始横坐标
+  //游戏初始化
+  init: function() {
+    //传入配置信息
+    var opts = CONFIG;
+    this.opts = opts;
+    // 飞机对象初始横坐标
     this.planePosX = canvasWidth / 2 - opts.planeSize.width / 2;
     this.planePosY = canvasHeight - opts.planeSize.height - 50;
+    //获取飞机的图像，若没有进行设置则默认为蓝色战机图像
     this.planeIcon = this.planeIcon || resourceHelper.getImage("bluePlaneIcon");
-    // opts.planeType = opts.planeType || 'bluePlaneIcon';
-    // 加载图片资源，加载完成才能交互
-    // resourceHelper.load(opts.resources, function(resources) {
-    //   // 更新图片和音乐
-    //   self.images = resources['images'];
-    //   self.sounds = resources['sounds'];
-    //   self.planeIcon = self.images[opts.planeType];
-    //   self.opts = opts;
-    //   self.opts.onInit && self.opts.onInit();
-    // });
-    // 设置opts
-    this.opts = opts;
   },
-  /**
-   * 设置游戏相关配置
-   */
-  // setGameOptions: function(opts) {
-  //   // 根据配置数据设置飞机型号
-  //   if (opts.planeType) {
-  //     this.planeIcon = this.images[opts.planeType];
-  //   }
-  // },
-  /**
-   * 更新游戏状态，分别有以下几种状态：
-   * start  游戏前
-   * playing 游戏中
-   * failed 游戏失败
-   * success 游戏成功
-   * stop 游戏暂停
-   */
-  // setStatus: function(status) {
-  //   this.status = status;
-  // },
-  /**
-   * start 游戏开始需要设置
-   * - 创建飞机
-   * - 设置初始参数
-   */
+  //游戏开始
   start: function () {
-    // 获取游戏初始化 level
     var self = this;
     var opts = this.opts;
-    // var images = this.images;
-    // 清空射击目标对象数组
-    this.enemies = []; 
-    this.score = 0;
-
+    this.score = 0;//分数清零
+    this.enemies = []; //敌人数组清零
     // 创建主角英雄
     this.plane = new Plane({
       x: this.planePosX,
@@ -92,12 +50,8 @@ var GAME = {
       bulletIcon: resourceHelper.getImage("fireIcon"),
       boomIcon: resourceHelper.getImage("enemyBigBoomIcon")
     });
-    // 播放背景音乐
-    resourceHelper.playSound('gameSound', {loop: true});
-
-    // // 飞机开始射击
+    // 飞机开始射击
     this.plane.startShoot();
-    // resourceHelper.playSound('shootSound');
 
     this.bindTouchAction();
 
@@ -109,19 +63,19 @@ var GAME = {
       self.createEnemy('big');
     }, 1500);
     
-    // this.setStatus('playing');
     // 开始动画循环
     this.update();
+ 
+    // 播放背景音乐
+    resourceHelper.playSound('gameSound', {loop: true});
 
+    //显示左上角的即时得分
     document.getElementById("uiScore").style.display = "block";
   },
-  /**
-   * 生成怪兽
-   */
+  //生成怪兽
   createEnemy: function(type) {
     var enemies = this.enemies;
     var opts = this.opts;
-    var images = this.images;
     var enemySize = opts.enemySmallSize;
     var enemySpeed = opts.enemySpeed;
     var enemyIcon = resourceHelper.getImage("enemySmallIcon");
@@ -150,12 +104,10 @@ var GAME = {
     if (enemies.length < 5) {
       enemies.push(new Enemy(initOpt));
     }
-    
-    // console.log(enemies);
   },
+  //更新游戏
   update: function (params) {
     var self = this;
-    var opts = this.opts;
 
     // 先清理画布
     context.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -167,36 +119,32 @@ var GAME = {
 
     // 如果飞机死了游戏就结束
     if (this.plane.status === 'boomed') {
-      // 游戏结束
-      // this.setStatus('end');
       this.end();
       return;
     }
 
-    // this.opts.onUpdate && this.opts.onUpdate();
+    //获取即时得分
     document.getElementById("gamingScore").innerHTML=this.score;
+
     // 不断循环 update
     requestAnimFrame(function() {
       self.update()
     });
   },
+  //游戏结束
   end: function() {
     // 先清理画布
     context.clearRect(0, 0, canvasWidth, canvasHeight);
     // 清除声音
     resourceHelper.pauseSound('gameSound');
-    // resourceHelper.pauseSound('shootSound');
     // 清除定时器
     clearInterval(this.createBigEnemyInterval);
     clearInterval(this.createSmallEnemyInterval);
     document.getElementById("uiScore").style.display = "none";
     document.getElementById("uiResult").style.display= "block";
     document.getElementById("score").innerHTML=this.score;
-//     this.opts.onEnd && this.opts.onEnd();
   },
-  /**
-   * 提供给外面的绑定事件用的
-   */
+  //绑定外部事件
   bindTouchAction: function () {
     var opts = this.opts;
     var planeMinX = 0;
@@ -238,9 +186,8 @@ var GAME = {
       }, false);
     }, false);
   },
+  //更新元素相关信息
   updateElement: function() {
-    var opts = this.opts;
-    var enemySize = opts.enemySize;
     var enemies = this.enemies;
     var plane = this.plane;
     var i = enemies.length;
@@ -264,10 +211,9 @@ var GAME = {
           case 'normal':
             // 判断是否击中未爆炸的敌人
             if (plane.hasHit(enemy)) {
-              // 设置爆炸时长展示第一帧）
+              // 设置爆炸时长展示第一帧
               enemy.live --;
-              resourceHelper.playSound('shootSound');
-              // console.log(enemy);
+              resourceHelper.playSound('hitSound');
               if (enemy.live === 0) {
                 enemy.booming();
               }
@@ -277,15 +223,15 @@ var GAME = {
             enemy.booming();
             break;
           case 'boomed':
-            var point = enemy.type === 'big' ? 1000 : 100;
+            var point = enemy.type === 'big' ? 1000 : 90;
             this.enemies.splice(i, 1);
             this.score += point;
             resourceHelper.playSound('boomSound');
         }
       }
-      
     }
   },
+  //绘制战机与敌机
   draw: function() {
     this.plane.draw();
     // 更新敌人

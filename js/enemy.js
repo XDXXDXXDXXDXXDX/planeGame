@@ -1,3 +1,4 @@
+//敌人对象
 var Enemy = function(opts) {
     var opts = opts || {};
     Element.call(this, opts);
@@ -13,7 +14,7 @@ Enemy.prototype = new Element();
 
 Enemy.prototype.down = function() {
     this.move(0, this.speed);
-    return this;
+    // return this;
 }
 
 Enemy.prototype.booming = function() {
@@ -22,11 +23,10 @@ Enemy.prototype.booming = function() {
     if(this.boomCount > 8) {
         this.status = "boomed";
     }
-    return this;
+    // return this;
 }
 
 Enemy.prototype.draw = function() {
-    // context.fillRect(this.x, this.y, this.width, this.height);
     switch(this.status) {
         case "normal":
             context.drawImage(this.icon, this.x, this.y, this.width, this.height);
@@ -35,5 +35,5 @@ Enemy.prototype.draw = function() {
             context.drawImage(this.boomIcon, this.x, this.y, this.width, this.height);
             break;
     }
-    return this;
+    // return this;
 };

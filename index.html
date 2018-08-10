@@ -11,7 +11,7 @@
     <canvas id="game" width="666" height="666"></canvas>
     <div id="uiIndex">
         <h1 class="title">打灰机</h1>
-        <div class="indexButton">
+        <div>
             <button id="startGame" class="btn">开始游戏</button>
             <button id="gameSetting" class="btn">游戏设置</button>
             <button id="gameRule" class="btn">游戏说明</button>
@@ -20,39 +20,43 @@
 
     <div id="uiSetting">
         <h2 class="title">游戏设置</h2>
-        <p>音乐设置
+        <span>音乐设置</span>
         <select id="musicSetting" class="setSelect">
             <option value="open">开启音乐</option>
             <option value="close">关闭音乐</option>
         </select>
-        </p>
-        <p>战机设置
+        <br/>
+        <span>战机设置</span>
         <select id="planeSetting" class="setSelect">
             <option value="bluePlaneIcon">蓝色战机</option>
             <option value="pinkPlaneIcon">粉红战机</option>
         </select>
-        </p>
-        <p>背景设置
+        <br/>
+        <span>背景设置</span>
         <select id="backgroundSetting" class="setSelect">
             <option value="1">坊间流水</option>
             <option value="2">彩色天堂</option>
             <option value="3">绿水青山</option>
             <option value="4">炎热地狱</option>
         </select>
-        </p>
-        <button id="confirmSetting" class="btn">确认设置</button>
+        <br/>
+        <button id="confirmSetting" class="btn confirmBtn">确认设置</button>
     </div>
 
     <div id="uiRule">
         <h2 class="title">游戏说明</h2>
-        <p class="rule">通过手指触摸移动飞机<br/>击杀小飞机得90分<br/>击杀大飞机得1000分<br/>无限时间尽情玩耍</p>
-        <button id="confirmRule" class="btn">我明白了</button>
+        <p class="rule">通过手指触摸移动飞机<br/>
+            击杀小飞机得90分<br/>
+            击杀大飞机得1000分<br/>
+            无限时间尽情玩耍
+        </p>
+        <button id="confirmRule" class="btn confirmBtn">我明白了</button>
     </div>
 
     <div id="uiResult">
         <h2 class="title">游戏结束</h2>
         <p class="result">你的得分<span id="score"></span></p>
-        <button id="confirmResult" class="btn">我知道了</button>
+        <button id="confirmResult" class="btn confirmBtn">我知道了</button>
         <button id="again" class="btn">再来一次</button>
     </div>
 

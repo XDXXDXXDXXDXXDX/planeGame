@@ -7,28 +7,23 @@ var Plane = function (opts) {
   var opts = opts || {};
   // 调用父类方法
   Element.call(this, opts);
-
   // 特有属性
   this.status = 'normal';
   this.icon = opts.icon;
+  this.boomIcon = opts.boomIcon;
+  this.boomCount = 0;
   // 子弹相关
   this.bullets = [];
   this.bulletSize = opts.bulletSize;
   this.bulletSpeed = opts.bulletSpeed;
   this.bulletIcon = opts.bulletIcon;
-  this.shootSound = opts.shootSound;
-   // 特有属性，爆炸相关
-  this.boomIcon = opts.boomIcon;
-  this.boomCount = 0;
+  this.shootSound = opts.shootSound; 
 };
 
 // 继承Element的方法
 Plane.prototype = new Element();
 
-/**
- * 方法: hasHit 判断是否撞到当前元素 
- * @param  {target}  target 目标元素实例
- */
+//判断是否撞到飞机的方法
 Plane.prototype.hasCrash = function(target) {
   var crash = false;
   // 判断四边是否都没有空隙
@@ -42,9 +37,7 @@ Plane.prototype.hasCrash = function(target) {
   return crash;
 };
 
-/**
- * 方法: booming 爆炸中
- */
+//爆炸中
 Plane.prototype.booming = function() {
   this.status = 'booming';
   this.boomCount += 1;
@@ -52,15 +45,10 @@ Plane.prototype.booming = function() {
     this.status = 'boomed';
     clearInterval(this.shooting);
   }
- 
-  return this;
 }
 
 
-/**
- * 方法: hasHit 判断是否击中当前元素 
- * @param  {target}  target 目标元素实例
- */
+//判断是否击中敌机的方法
 Plane.prototype.hasHit = function(target) {
   var bullets = this.bullets;
   var hasHit = false;

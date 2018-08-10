@@ -1,3 +1,4 @@
+//基础配置信息
 var CONFIG = {
     enemySpeed: 4,
     planeSize: {
@@ -43,10 +44,10 @@ var CONFIG = {
         ],
         sounds: [
           { 
-            src: './sound/biubiubiu.mp3',
-            name: 'shootSound'
+            src: './sound/biu.mp3',
+            name: 'hitSound'
           },
-          { src: './sound/music.mp3',
+          { src: './sound/bgm.mp3',
             name: 'gameSound'
           },
           { src: './sound/die.mp3',

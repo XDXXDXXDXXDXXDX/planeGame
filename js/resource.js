@@ -3,12 +3,9 @@
  */
 var resourceHelper = {
   enableMusic: true,
-  /**
-   * 加载图片
-   */
+  //加载图片
   imageLoader: function(src, callback) {
     var image = new Image();
-    // 图片加载完成
     image.addEventListener('load', callback);
     image.addEventListener('error', function() {
       alert('iamgerror');
@@ -20,36 +17,35 @@ var resourceHelper = {
   getImage: function(imageName) {
     return this.resources.images[imageName];
   },
-  /**
-   * 加载声音
-   */
+  //加载声音
   soundLoader: function(src, callback) {
     var sound = new Audio();
-    // // 图片加载完成
     sound.addEventListener('canplaythrough', callback);
     sound.src = src;
-    // callback();
     return sound;
   },
-  // preplayAllSound: function() {
-  //   var self = this;
-  //   var sounds = this.resources.sounds;
-    
-  //   for(var key in sounds) {
-  //     this.playSound(key, {disabled: true});
-  //     setTimeout(function() {
-  //       self.pauseSound(key);
-  //       sounds[key].volume = 1;
-  //     }, 50);
-  //   }
-  // },
-  // setMusic: function(enable) {
-  //   this.enableMusic = enable;
-  // },
-  /**
-   * 资源加载
-   * @param  {Array} resources 资源列表
-   */
+  //播放音乐/音效
+  playSound: function(sound, config) { 
+    var soundObj = this.resources.sounds[sound];
+    if (!soundObj || !this.enableMusic){
+      return;
+    }
+    config = config || {};
+    // 是否设置循环
+    if(config.loop){
+      soundObj.loop = 'loop';
+    } 
+    soundObj.currentTime = 0;  
+    soundObj.play();
+    return soundObj;
+  },
+  //暂停音乐
+  pauseSound: function(sound) { 
+    var soundObj = this.resources.sounds[sound];
+    soundObj.pause();
+    return soundObj;
+  },
+  //资源加载
   load: function(resources, callback) {
     var images = resources.images;
     var sounds = resources.sounds;
@@ -89,37 +85,5 @@ var resourceHelper = {
         }
       });
     }
-  },
-  //播放音乐/音效
-  playSound: function(sound, config) { 
-    var soundObj = this.resources.sounds[sound];
-    if (!soundObj || !this.enableMusic){
-      return;
-    }
-    config = config || {};
-    // 是否设置循环
-    if(config.loop){
-      soundObj.loop = 'loop';
-    } 
-    // 是否设置音量
-    // if(config.disabled){
-    //   soundObj.volume = 0;
-    // } else {
-    //   soundObj.volume = 1;
-    // }
-
-    soundObj.currentTime = 0;  
-    soundObj.play();
-    return soundObj;
-  },
-  //暂停音乐
-  pauseSound: function(sound) { 
-    var soundObj = this.resources.sounds[sound];
-    // if (!soundObj || !this.enableMusic){
-    //   return;
-    // }
-    soundObj.pause();
-    return soundObj;
   }
-  
 }
