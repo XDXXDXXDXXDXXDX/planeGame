@@ -56,10 +56,9 @@ var GAME = {
     this.plane.startShoot();
 
     //判断是否支持触控来绑定不同的操作方式
-    if(document.hasOwnProperty("touchstart")) {
+    if(document.hasOwnProperty("ontouchstart")) {
       this.bindTouchAction();
-    }
-    else {
+    }else {
       this.bindClickAction();
     }
     
