@@ -55,8 +55,14 @@ var GAME = {
     // 飞机开始射击
     this.plane.startShoot();
 
-    this.bindTouchAction();
-
+    //判断是否支持触控来绑定不同的操作方式
+    if(document.hasOwnProperty("touchstart")) {
+      this.bindTouchAction();
+    }
+    else {
+      this.bindClickAction();
+    }
+    
     // 随机生成大小敌机
     this.createSmallEnemyInterval = setInterval(function () {
       self.createEnemy('normal');
@@ -130,6 +136,7 @@ var GAME = {
     if(this.timeCount == 0) {
       this.winOlose = true;
       this.end();
+      resourceHelper.playSound('win');
       return;
     }
 
@@ -181,6 +188,45 @@ var GAME = {
         }
         
         e.preventDefault();
+        // 更新飞机的位置
+        plane.setPosition(newPlaneX, newPlaneY);
+      }, false);
+    }, false);
+  },
+  bindClickAction: function () {
+    var opts = this.opts;
+    var planeMinX = 0;
+    var planeMinY = 0;
+    var planeMaxX = canvasWidth - opts.planeSize.width;
+    var planeMaxY = canvasHeight - opts.planeSize.height;
+    var self = this;
+    
+    canvas.addEventListener('click', function (e) {
+      var plane = self.plane;
+      var oldClickX = e.clientX;
+      var oldClickY = e.clientY;
+      var oldPlaneX = plane.x;
+      var oldPlaneY = plane.y;
+
+      canvas.addEventListener('mousemove', function (e) {
+        var newMouseX = e.clientX;
+        var newMouseY = e.clientY;
+        var newPlaneX = oldPlaneX + newMouseX - oldClickX;
+        var newPlaneY = oldPlaneY + newMouseY - oldClickY;
+        // 判断极限
+        if(newPlaneX < planeMinX){
+          newPlaneX = planeMinX;
+        }
+        if(newPlaneX > planeMaxX){
+          newPlaneX = planeMaxX;
+        }
+        if(newPlaneY < planeMinY){
+          newPlaneY = planeMinY;
+        }
+        if(newPlaneY > planeMaxY){
+          newPlaneY = planeMaxY;
+        }
+        
         // 更新飞机的位置
         plane.setPosition(newPlaneX, newPlaneY);
       }, false);

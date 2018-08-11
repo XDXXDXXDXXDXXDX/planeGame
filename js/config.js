@@ -2,8 +2,8 @@
 var CONFIG = {
     enemySpeed: 4,
     planeSize: {
-        width: 36,
-        height: 55
+        width: 50,
+        height: 40
     },
     enemySmallSize: {
         width: 54,
@@ -58,6 +58,9 @@ var CONFIG = {
           },
           { src: './sound/boom.mp3',
             name: 'boomSound'
+          },
+          { src: './sound/win.mp3',
+            name: 'win'
           },
         ]
     }

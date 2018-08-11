@@ -8,16 +8,19 @@ body {
     width: 100%;
     overflow: hidden;
     background-image: url("./img/bg_1.jpg");
-    background-repeat: no-repeat;
 }
 
 #uiIndex, #uiSetting, #uiRule, #uiResult {
     height: 200px;
+    width: 200px;
     position: absolute;
     top: 50%;
+    left: 50%;
+    margin-left: -100px;
     margin-top: -100px;
-    width: 100%;
     text-align: center;
+    background: rgba(211, 211, 211, 0.6);
+    border-radius: 6px;
 }
 
 #uiSetting, #uiRule, #uiResult, #uiScore, #uiCountDown, #win, #lose {
@@ -37,6 +40,7 @@ body {
 #uiCountDown, #uiScore {
     position : absolute;
     width : 100px;
+    background: black;
 }
 
 #uiCountDown {
@@ -66,7 +70,7 @@ body {
 }
 
 .setSelect {
-    margin-left: 26px;
+    margin-left: 6px;
     width: 100px;
     margin-top: 16px;
 }
@@ -78,7 +82,12 @@ body {
     margin-left: 10%;
 }
 
-.result, #win, #lose {
+.result {
     color: white;
     margin-top: 16px;
+}
+
+#win, #lose {
+    color: white;
+    margin-top: 50px;
 }
