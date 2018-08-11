@@ -21,7 +21,7 @@ var resourceHelper = {
   soundLoader: function(src, callback) {
     var sound = new Audio();
     sound.addEventListener('canplaythrough', callback);
-    sound.volume = 0.5;
+    sound.volume = 0;
     sound.src = src;
     return sound;
   },
