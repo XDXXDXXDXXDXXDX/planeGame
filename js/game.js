@@ -55,12 +55,10 @@ var GAME = {
     // 飞机开始射击
     this.plane.startShoot();
 
-    //判断是否支持触控来绑定不同的操作方式
-    if(document.hasOwnProperty("ontouchstart")) {
-      this.bindTouchAction();
-    }else {
-      this.bindClickAction();
-    }
+    //绑定鼠标与触控
+    this.bindTouchAction();
+    this.bindClickAction();
+  
     
     // 随机生成大小敌机
     this.createSmallEnemyInterval = setInterval(function () {
