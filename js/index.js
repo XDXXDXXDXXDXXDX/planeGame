@@ -47,6 +47,8 @@ function bindEvent() {
         var playMusic = musicSelect.options[musicIndex].value;
         if (playMusic=="close") {
             resourceHelper.enableMusic = false;
+        }else {
+            resourceHelper.enableMusic = true;
         }
     }, false);
 
