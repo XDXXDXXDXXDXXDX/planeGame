@@ -1,3 +1,4 @@
+//所有元素从此出发
 var Element = function(opts) {
     var opts = opts || {};
     this.x = opts.x;

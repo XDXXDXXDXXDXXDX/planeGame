@@ -1,6 +1,4 @@
-/**
- * 资源管理器
- */
+//资源管理器
 var resourceHelper = {
   enableMusic: true,
   //加载图片
@@ -44,7 +42,6 @@ var resourceHelper = {
   pauseSound: function(sound) { 
     var soundObj = this.resources.sounds[sound];
     soundObj.pause();
-    return soundObj;
   },
   //资源加载
   load: function(resources, callback) {

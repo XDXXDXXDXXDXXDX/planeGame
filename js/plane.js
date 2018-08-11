@@ -1,8 +1,4 @@
-/**
- * 子类 Plane 飞机
- * 1、继承 Element
- * 2、依赖 Bullet
- */
+//子类 Plane 飞机
 var Plane = function (opts) {
   var opts = opts || {};
   // 调用父类方法
@@ -64,18 +60,13 @@ Plane.prototype.hasHit = function(target) {
   return hasHit;
 };
 
-/**
- * 方法: setPosition 根据方向水平移动一个身为
- */
+//根据计算得到的飞机位置来移动
 Plane.prototype.setPosition = function(newPlaneX, newPlaneY) {
   this.x = newPlaneX;
   this.y = newPlaneY;
-  return this;
 };
 
-/**
- * 方法: startShoot 方法
- */
+//开始射击
 Plane.prototype.startShoot = function() {
   var self = this;
   var bulletWidth = this.bulletSize.width;
@@ -86,7 +77,6 @@ Plane.prototype.startShoot = function() {
     var bulletX = self.x + self.width / 2 - bulletWidth / 2;
     var bulletY = self.y - bulletHeight;
     // 创建子弹
-  
     self.bullets.push(new Bullet({
       x: bulletX,
       y: bulletY,
@@ -99,7 +89,7 @@ Plane.prototype.startShoot = function() {
   
 };
 
-// 方法： drawBullets 画子弹
+//进行相关判定后调用子弹的画子弹方法画子弹
 Plane.prototype.drawBullets = function() {
   var bullets = this.bullets;
   var i = bullets.length;
@@ -118,7 +108,7 @@ Plane.prototype.drawBullets = function() {
   }
 };
 
-// 方法: draw 方法
+//绘制飞机的方法
 Plane.prototype.draw = function() {
   // 绘制飞机
   switch(this.status) {

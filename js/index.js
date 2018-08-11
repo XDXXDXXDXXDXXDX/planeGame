@@ -63,6 +63,7 @@ function bindEvent() {
 
 //游戏初始化
 function init() {
+    //加载完资源才可以进行其余操作
     resourceHelper.load(CONFIG.resources, function(resources) {
         GAME.init();
         bindEvent();

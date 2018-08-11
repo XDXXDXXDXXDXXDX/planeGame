@@ -59,7 +59,6 @@ var GAME = {
     this.bindTouchAction();
     this.bindClickAction();
   
-    
     // 随机生成大小敌机
     this.createSmallEnemyInterval = setInterval(function () {
       self.createEnemy('normal');
@@ -308,6 +307,7 @@ var GAME = {
     clearInterval(this.createBigEnemyInterval);
     clearInterval(this.createSmallEnemyInterval);
     clearInterval(this.countDown);
+    //游戏结束相关ui展示
     document.getElementById("uiScore").style.display = "none";
     document.getElementById("uiCountDown").style.display = "none";
     document.getElementById("uiResult").style.display= "block";

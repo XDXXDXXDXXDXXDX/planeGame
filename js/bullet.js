@@ -1,6 +1,4 @@
-/**
- * 子类 Bullet 子弹对象
- */
+//子类 Bullet 子弹对象
 var Bullet = function (opts) {
   var opts = opts || {};
   Element.call(this, opts);
@@ -30,7 +28,7 @@ Bullet.prototype.hasCrash = function(target) {
   return crash;
 };
 
-// 方法: draw 方法
+//绘制子弹
 Bullet.prototype.draw = function() {
   context.drawImage(this.icon, this.x, this.y, this.width, this.height);
   return this;
