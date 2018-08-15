@@ -41,6 +41,7 @@ Plane.prototype.booming = function() {
     this.status = 'boomed';
     clearInterval(this.shooting);
   }
+  return this;
 }
 
 
@@ -64,6 +65,7 @@ Plane.prototype.hasHit = function(target) {
 Plane.prototype.setPosition = function(newPlaneX, newPlaneY) {
   this.x = newPlaneX;
   this.y = newPlaneY;
+  return this;
 };
 
 //开始射击

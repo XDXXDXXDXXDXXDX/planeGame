@@ -18,9 +18,12 @@ var resourceHelper = {
   //加载声音
   soundLoader: function(src, callback) {
     var sound = new Audio();
-    sound.addEventListener('canplaythrough', callback);
+    sound.addEventListener('canplaythrough', function() {
+
+    });
     sound.volume = 0.5;
     sound.src = src;
+    callback();
     return sound;
   },
   //播放音乐/音效
